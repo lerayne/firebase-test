@@ -14,7 +14,8 @@ export default function () {
       rules: [
         {
           test: /\.(ts|tsx|js|jsx)$/,
-          use: 'ts-loader'
+          use: 'ts-loader',
+          exclude: /node_modules/
         }
       ]
     },

@@ -69,7 +69,7 @@ const App: FC<IAppProps> = () => {
   }
 
   return <>
-    <Header user={user} onLoginClick={popup} />
+    {/*<Header user={user} onLoginClick={popup} />*/}
     <Test />
   </>
 }
