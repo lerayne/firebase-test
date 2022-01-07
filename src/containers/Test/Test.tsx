@@ -1,4 +1,4 @@
-import {useState, Component} from 'react'
+import {useState, useRef, useEffect} from 'react'
 import {Provider, useDispatch, useSelector} from 'react-redux'
 import {configureStore, createSlice} from '@reduxjs/toolkit'
 
@@ -43,7 +43,7 @@ function Header() {
   </header>
 }
 
-function Header2({ user, onLogin, onLogout }) {
+function Header2({user, onLogin, onLogout}) {
   console.log('render Header2')
 
   const [color, setColor] = useState('black')
@@ -58,7 +58,7 @@ function Header2({ user, onLogin, onLogout }) {
   </header>
 }
 
-function Content2 () {
+function Content2() {
   console.log('render Content2')
   return <span>1111</span>
 }
@@ -69,31 +69,36 @@ function Content() {
 }
 
 
-export default class RootComponent extends Component {
-  state = {
-    user2: null,
-    testObject: {
-      items: [1,2,3]
-    }
-  }
+export default function RootComponent() {
+  console.log('render RootComponent')
 
-  render() {
-    console.log('render RootComponent')
+  //const items = useRef([1, 2, 3])
 
-    return <div>
-      <Provider store={store}>
-        <Header2
+  const [stateItems, setStateItems] = useState([1, 2, 3])
+
+  useEffect(() => {
+    console.log('effect:', stateItems)
+  }, [stateItems])
+
+  return <div>
+    <Provider store={store}>
+      {/*<Header2
           user={this.state.user2}
           onLogin={() => this.setState({user2: 'Andrew'})}
           onLogout={() => this.setState({user2: null})}
-        />
-        <Content />
-        <ol>{this.state.testObject.items.map(item => <li key={item}>{item}</li>)}</ol>
-        <button onClick={() => {
-          this.state.testObject.items.push(this.state.testObject.items.length + 1)
-          this.setState({ testObject: this.state.testObject })
-        }}>add item</button>
-      </Provider>
-    </div>
-  }
+        />*/}
+      <Content />
+      <ol>{stateItems.map(item => <li key={item}>{item}</li>)}</ol>
+      <button
+        onClick={() => {
+          setStateItems(array => {
+            array.push(array.length + 1)
+            console.log('func', array)
+            return [...array]
+          })
+        }}
+      >add item
+      </button>
+    </Provider>
+  </div>
 }
