@@ -1,4 +1,4 @@
-import {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect, Component} from 'react'
 import {Provider, useDispatch, useSelector} from 'react-redux'
 import {configureStore, createSlice} from '@reduxjs/toolkit'
 
@@ -58,9 +58,19 @@ function Header2({user, onLogin, onLogout}) {
   </header>
 }
 
-function Content2() {
-  console.log('render Content2')
-  return <span>1111</span>
+class Content2 extends Component {
+  componentDidMount() {
+    console.log('Content2 mounted')
+  }
+
+  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any) {
+    console.log('Content2 updated')
+  }
+
+  render () {
+    console.log('render Content2')
+    return <span>1111</span>
+  }
 }
 
 function Content() {
